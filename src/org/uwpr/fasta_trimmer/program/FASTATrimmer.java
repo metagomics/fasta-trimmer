@@ -123,7 +123,7 @@ public class FASTATrimmer {
 	
 	/**
 	 * Return true if the protein sequence contains the given peptide sequence--assuming trypsin was used
-	 * to digest the proteins.
+	 * to digest the proteins. Handle I/L substitution
 	 * 
 	 * @param proteinSequence
 	 * @param peptideSequence
@@ -132,7 +132,10 @@ public class FASTATrimmer {
 	private boolean proteinContainsPeptide( String proteinSequence, String peptideSequence ) {
 		
 		//System.err.println( "Testing if " + proteinSequence + " contains " + peptideSequence );
-		
+
+		proteinSequence = proteinSequence.replaceAll( "L", "I" );
+		peptideSequence = peptideSequence.replaceAll( "L", "I" );
+
 		if( proteinSequence.startsWith( peptideSequence ) )
 			return true;
 		
